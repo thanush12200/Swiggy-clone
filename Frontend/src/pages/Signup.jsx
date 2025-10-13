@@ -1,16 +1,30 @@
-import React from 'react'
+import React, { useState } from "react";
 
 const Signup = () => {
+  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
+  const [password, setPassword] = useState("");
+
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+  };
+
   return (
     <div>
       <h2>Signup Form</h2>
-      <form >
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Name: </label>
           <input
             type="text"
-            placeholder='name'
-            required = 'true'
+            placeholder="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
           />
         </div>
 
@@ -18,17 +32,21 @@ const Signup = () => {
           <label>Email: </label>
           <input
             type="email"
-            placeholder='email'
-            required = 'true'
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
 
         <div>
-          <label>number: </label>
+          <label>Number: </label>
           <input
             type="number"
-            placeholder='phone number'
-            required = 'true'
+            placeholder="phone number"
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
+            required
           />
         </div>
 
@@ -36,8 +54,10 @@ const Signup = () => {
           <label>Password: </label>
           <input
             type="password"
-            placeholder='password'
-            required='true'
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
 
@@ -45,6 +65,6 @@ const Signup = () => {
       </form>
     </div>
   );
-}
+};
 
-export default Signup
+export default Signup;
