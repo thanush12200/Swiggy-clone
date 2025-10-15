@@ -1,0 +1,8 @@
+.app-nav{
+    padding: 20px;
+    background-color: orange;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+

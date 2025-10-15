@@ -1,42 +1,49 @@
-import React from 'react'
+import { use, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Auth.css";
 
-const Login = () => {
+function Login({setisloggedin}) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Login form submitted", { email, password });
+    setisloggedin(true);
+    navigate("/");
+  };
+
   return (
-    <div>
-      <h2>Login Form</h2>
-      <form >
-        
-        <div>
-          <label>number: </label>
-          <input
-            type="number"
-            placeholder='phone number'
-            required = 'true'
-          />
-        </div>
+    <div className="auth-container">
+      <h2>Login</h2>
 
-        <div>
-          <label>Email: </label>
-          <input
-            type="email"
-            placeholder='email'
-            required = 'true'
-          />
-        </div>
-
-        <div>
-          <label>Password: </label>
-          <input
-            type="password"
-            placeholder='password'
-            required='true'
-          />
-        </div>
-
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
         <button type="submit">Login</button>
       </form>
+
+      <p className="auth-link">
+        Don't have an account? <Link to="/signup">Sign Up</Link>
+      </p>
     </div>
   );
 }
 
-export default Login
+export default Login;
