@@ -1,18 +1,28 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Auth.css";
+import { loginAPI } from "../services/api";
 
-function Login({setisloggedin}) {
+function Login({ setIsLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login form submitted", { email, password });
-    setisloggedin(true);
-    navigate("/");
+
+    try {
+      const credentials = { email, password };
+      const data = await loginAPI(credentials);
+
+      console.log("Login successful:", data);
+      setIsLoggedIn(true);
+      navigate("/");
+    } catch (error) {
+      console.error("Error:", error);
+      alert(error.response?.data?.message || "Login failed. Please try again.");
+    }
   };
 
   return (
